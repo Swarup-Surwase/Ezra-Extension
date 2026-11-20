@@ -1,0 +1,11 @@
+{
+  "serverUrl": "http://localhost:8790",
+  "agentName": "ezra-code-agent",
+  "modelName": "google-gemini/gemini-3-1-flash-lite",
+  "fallbackModelName": "google-gemini/gemini-3-flash-preview",
+  "contextBudgetTokens": 16000,
+  "maxDiscoveredFiles": 15,
+  "enableMcpTools": true,
+  "commandTimeoutMs": 30000
+}
+

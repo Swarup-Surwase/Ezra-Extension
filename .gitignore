@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build artifacts
+dist/
+out/
+*.vsix
+
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+
+# TrueForge & Database
+*.sqlite
+*.sqlite-journal
+trueforge-data/
+
+# Logs & Tests
+*.log
+npm-debug.log*
+.vscode-test/
+coverage/
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Local reference clones and test fixtures (too large for submission repo)
+reference/
+fixtures/
+
+# Script-generated env
+.env
+

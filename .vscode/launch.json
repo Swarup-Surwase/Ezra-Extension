@@ -1,0 +1,45 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Extension (Flask Fixture)",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}",
+        "--folder-uri=${workspaceFolder}/fixtures/flask"
+      ],
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+      "preLaunchTask": "npm: compile",
+      "env": {
+        "TRUEFORGE_SERVER_URL": "http://localhost:8790"
+      },
+      "sourceMaps": true,
+      "smartStep": true
+    },
+    {
+      "name": "Run Extension (Choose Folder)",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}"
+      ],
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+      "preLaunchTask": "npm: compile",
+      "env": {
+        "TRUEFORGE_SERVER_URL": "http://localhost:8790"
+      },
+      "sourceMaps": true,
+      "smartStep": true
+    },
+    {
+      "name": "Extension Tests (Headless)",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/dist/test/runTests.js",
+      "preLaunchTask": "npm: compile",
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+      "sourceMaps": true
+    }
+  ]
+}

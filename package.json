@@ -1,0 +1,155 @@
+{
+  "name": "trueforge-coding-agent",
+  "displayName": "TrueForge Coding Agent",
+  "description": "Editor-native coding agent extension powered by TrueFoundry's TrueForge harness",
+  "version": "1.0.0",
+  "publisher": "truefoundry-forgeathon",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "AI",
+    "Programming Languages",
+    "Machine Learning"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/src/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "trueforge-agent-container",
+          "title": "TrueForge Agent",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "trueforge-agent-container": [
+        {
+          "type": "webview",
+          "id": "trueforge.agentView",
+          "name": "Agent Chat & Plan"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "trueforge.inlineEdit",
+        "title": "TrueForge: Inline Edit Selection",
+        "category": "TrueForge"
+      },
+      {
+        "command": "trueforge.openAgentPanel",
+        "title": "TrueForge: Open Agent Mode",
+        "category": "TrueForge"
+      },
+      {
+        "command": "trueforge.reviewDiffs",
+        "title": "TrueForge: Review Proposed Changes",
+        "category": "TrueForge"
+      },
+      {
+        "command": "trueforge.acceptAllHunks",
+        "title": "TrueForge: Accept All Proposed Hunks",
+        "category": "TrueForge"
+      },
+      {
+        "command": "trueforge.rejectAllHunks",
+        "title": "TrueForge: Reject All Proposed Hunks",
+        "category": "TrueForge"
+      },
+      {
+        "command": "trueforge.cancelCurrentRun",
+        "title": "TrueForge: Stop / Cancel Active Run",
+        "category": "TrueForge"
+      },
+      {
+        "command": "trueforge.revertLastEdit",
+        "title": "TrueForge: Revert Last Applied Changes",
+        "category": "TrueForge"
+      },
+      {
+        "command": "trueforge.testResilience",
+        "title": "TrueForge: Test Resilience & Model Fallback",
+        "category": "TrueForge"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "trueforge.inlineEdit",
+        "key": "ctrl+alt+i",
+        "mac": "cmd+alt+i",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "trueforge.cancelCurrentRun",
+        "key": "escape",
+        "when": "trueforge.agentRunning"
+      }
+    ],
+    "configuration": {
+      "title": "TrueForge Coding Agent",
+      "properties": {
+        "trueforge.serverUrl": {
+          "type": "string",
+          "default": "http://localhost:8790",
+          "description": "Base URL of the local TrueForge agent server."
+        },
+        "trueforge.agentName": {
+          "type": "string",
+          "default": "ezra-code-agent",
+          "description": "Name of the agent defined in TrueForge."
+        },
+        "trueforge.modelName": {
+          "type": "string",
+          "default": "google-gemini/gemini-3-1-flash-lite",
+          "description": "Primary model configured in TrueForge (e.g. google-gemini/gemini-3-1-flash-lite, openai/gpt-4o, or custom)."
+        },
+        "trueforge.fallbackModelName": {
+          "type": "string",
+          "default": "google-gemini/gemini-3-flash-preview",
+          "description": "Secondary model configured in TrueForge for automatic fallback routing."
+        },
+        "trueforge.contextBudgetTokens": {
+          "type": "number",
+          "default": 16000,
+          "description": "Maximum token budget for assembled context."
+        },
+        "trueforge.maxDiscoveredFiles": {
+          "type": "number",
+          "default": 15,
+          "description": "Maximum number of files retrieved during automated workspace context assembly."
+        },
+        "trueforge.enableMcpTools": {
+          "type": "boolean",
+          "default": true,
+          "description": "Expose editor capabilities via embedded MCP server to TrueForge."
+        },
+        "trueforge.commandTimeoutMs": {
+          "type": "number",
+          "default": 30000,
+          "description": "Timeout in milliseconds for terminal command execution."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "build": "tsc -p ./",
+    "test": "npm run compile && node ./dist/test/runTests.js"
+  },
+  "devDependencies": {
+    "@types/diff": "^7.0.2",
+    "@types/node": "^20.14.0",
+    "@types/vscode": "^1.90.0",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "diff": "^5.2.0"
+  }
+}
